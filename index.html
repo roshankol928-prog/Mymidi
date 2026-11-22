@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My MIDI Links</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #121212; color: #fff; }
+    .song { display: flex; justify-content: space-between; align-items: center; background: #1e1e1e; padding: 12px; margin-bottom: 10px; border-radius: 8px; }
+    button { background: #2ea043; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    .url { font-size: 12px; color: #bbb; word-break: break-all; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <h2>MIDI Links</h2>
+  <div id="list"></div>
+
+  <script>
+    const baseUrl = "https://roshankol928-prog.github.io/Mymidi/";
+    const files = [
+      "Chunnari_Chunnari.mid",
+      "Pal_Pal.mid",
+      "Teri_Deewani.mid",
+      "Pyar_Ki_Ek_Kahani.mid",
+      "Soch__Hardy.mid"
+    ];
+
+    const container = document.getElementById("list");
+    files.forEach(file => {
+      const fullUrl = baseUrl + file;
+      const row = document.createElement("div");
+      row.className = "song";
+      row.innerHTML = `
+        <div>
+          <strong>${file}</strong>
+          <div class="url">${fullUrl}</div>
+        </div>
+        <button onclick="copyUrl('${fullUrl}', this)">Copy</button>
+      `;
+      container.appendChild(row);
+    });
+
+    function copyUrl(url, btn) {
+      navigator.clipboard.writeText(url).then(() => {
+        const oldText = btn.innerText;
+        btn.innerText = "Copied!";
+        setTimeout(() => btn.innerText = oldText, 1500);
+      });
+    }
+  </script>
+</body>
+</html>
